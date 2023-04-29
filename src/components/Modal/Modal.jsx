@@ -6,18 +6,18 @@ import PropTypes from 'prop-types';
 const modalEl = document.getElementById('modal-root');
 
 const Modal = ({ children, onClose }) => {
+  const handlerKeydown = ev => {
+    if (ev.code === 'Escape') {
+      onClose();
+    }
+  };
+
   useEffect(() => {
     window.addEventListener('keydown', handlerKeydown);
     return () => {
       window.removeEventListener('keydown', handlerKeydown);
     };
   }, []);
-
-  const handlerKeydown = ev => {
-    if (ev.code === 'Escape') {
-      onClose();
-    }
-  };
 
   const handlerBackdropClick = ev => {
     if (ev.target === ev.currentTarget) {
