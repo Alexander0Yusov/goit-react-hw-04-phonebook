@@ -78,7 +78,7 @@ export const App = () => {
     <div
       className={css.Wrap}
       style={{
-        Height: '100vh',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         // justifyContent: 'center',
