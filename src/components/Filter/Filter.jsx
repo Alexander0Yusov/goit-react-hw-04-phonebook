@@ -33,4 +33,5 @@ export default Filter;
 
 Filter.propTypes = {
   filter: PropTypes.func,
+  onModalOpen: PropTypes.func,
 };

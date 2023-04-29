@@ -75,4 +75,5 @@ export default Form;
 
 Form.propTypes = {
   addUser: PropTypes.func,
+  toggleModal: PropTypes.func,
 };
