@@ -8,5 +8,5 @@ const Section = ({ children }) => {
 export default Section;
 
 Section.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };

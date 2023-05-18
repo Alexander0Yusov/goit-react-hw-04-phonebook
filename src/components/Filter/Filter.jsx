@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import { FcSearch } from 'react-icons/fc';
 import { TiUserAdd } from 'react-icons/ti';
 
-const Filter = ({ filter, onModalOpen }) => {
+const Filter = ({ inputHandler, onModalOpen, filter }) => {
   return (
     <div className={css.panel}>
       <label className={css.label}>
         {/* Filter by Name: */}
         <input
-          onChange={e => filter(e)}
+          onChange={inputHandler}
           className={css.input}
+          value={filter}
           type="text"
           placeholder="Search by Name"
         ></input>
@@ -32,6 +33,7 @@ const Filter = ({ filter, onModalOpen }) => {
 export default Filter;
 
 Filter.propTypes = {
-  filter: PropTypes.func,
-  onModalOpen: PropTypes.func,
+  inputHandler: PropTypes.func.isRequired,
+  onModalOpen: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
 };

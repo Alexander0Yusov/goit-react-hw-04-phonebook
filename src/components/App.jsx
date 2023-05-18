@@ -15,10 +15,10 @@ export const App = () => {
     //localStorage.removeItem(LS_KEY);
     return (
       JSON.parse(localStorage.getItem(LS_KEY)) ?? [
-        { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-        { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-        { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-        { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+        { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56', url: '' },
+        { id: 'id-2', name: 'Hermione Kline', number: '443-89-12', url: '' },
+        { id: 'id-3', name: 'Eden Clements', number: '645-17-79', url: '' },
+        { id: 'id-4', name: 'Annie Copeland', number: '227-91-26', url: '' },
       ]
     );
   });
@@ -42,21 +42,17 @@ export const App = () => {
 
     if (decisionForAdd) {
       alert(`${decisionForAdd.name} is already in contacts !`);
-    } else {
-      setContacts(prev => {
-        return [...prev, newItem];
-      });
+      return;
     }
+
+    setContacts(prev => {
+      return [...prev, newItem];
+    });
   };
 
-  const filterByName = (name, array) => {
-    const lowName = name.toLowerCase();
-
-    const filteredArray = array.filter(item => {
-      const lowItem = item.name.toLowerCase();
-      return lowItem.includes(lowName);
-    });
-    return filteredArray;
+  const filterByName = () => {
+    const lowName = filter.toLowerCase();
+    return contacts.filter(item => item.name.toLowerCase().includes(lowName));
   };
 
   const inputHandler = e => {
@@ -89,13 +85,12 @@ export const App = () => {
     >
       <Section>
         <h2 className={css.title}>Phonebook</h2>
-        <Filter filter={inputHandler} onModalOpen={toggleModal} />
-        <Contacts
-          contactList={
-            filter === '' ? contacts : filterByName(filter, contacts)
-          }
-          deleteContact={deleteHandler}
+        <Filter
+          inputHandler={inputHandler}
+          onModalOpen={toggleModal}
+          filter={filter}
         />
+        <Contacts contactList={filterByName()} deleteContact={deleteHandler} />
       </Section>
       {showModal && (
         <Modal onClose={toggleModal}>

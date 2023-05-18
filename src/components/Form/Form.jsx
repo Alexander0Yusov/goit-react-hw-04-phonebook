@@ -8,11 +8,12 @@ import PropTypes from 'prop-types';
 const Form = ({ addUser, toggleModal }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [url, setUrl] = useState('');
 
   const handlerSubmit = e => {
     e.preventDefault();
     const modelId = nanoid();
-    addUser({ id: modelId, name: name, number: number });
+    addUser({ id: modelId, name: name, number: number, url: url });
     toggleModal();
   };
 
@@ -26,10 +27,23 @@ const Form = ({ addUser, toggleModal }) => {
     setNumber(e.currentTarget.value);
   };
 
+  const handlerChangeFile = e => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setUrl(reader.result);
+    };
+  };
+
   return (
     <form onSubmit={handlerSubmit} className={css.form} autoComplete="off">
       <span className={css.iconSpan}>
-        <FiUser />
+        {url ? (
+          <img className={css.photo} src={url} alt="User portrait"></img>
+        ) : (
+          <FiUser />
+        )}
       </span>
       <label className={css.formLabel}>
         {/* <p className={css.formParagraph}>Name:</p> */}
@@ -61,7 +75,12 @@ const Form = ({ addUser, toggleModal }) => {
       </label>
       <label className={css.imageLabel}>
         <MdOutlineAddAPhoto className={css.icon} />
-        <input type="file" name="image" className={css.imageInput} />
+        <input
+          type="file"
+          name="image"
+          className={css.imageInput}
+          onChange={handlerChangeFile}
+        />
       </label>
 
       <button className={css.button} type="submit">
@@ -74,6 +93,6 @@ const Form = ({ addUser, toggleModal }) => {
 export default Form;
 
 Form.propTypes = {
-  addUser: PropTypes.func,
-  toggleModal: PropTypes.func,
+  addUser: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };

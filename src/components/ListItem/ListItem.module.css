@@ -13,10 +13,13 @@
 }
 
 .imageThumb {
+  display: flex;
+  align-items: center;
   width: 36px;
   height: 36px;
   border-radius: 50%;
   margin-right: 20px;
+  overflow: hidden;
 
   background-color: #b0b1b4;
 }
@@ -47,4 +50,10 @@
   cursor: pointer;
   background-color: #5db4fa;
   /* background-color: #c8c8c8; */
+}
+
+.photoDemo {
+  display: block;
+  width: 100%;
+  height: auto;
 }

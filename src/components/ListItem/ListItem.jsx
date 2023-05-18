@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 import css from './ListItem.module.css';
 
-const ListItem = ({ id, name, number, deleteContact }) => {
+const ListItem = ({ id, name, number, url, deleteContact }) => {
   return (
-    <li key={id} className={css.listItem}>
-      <div className={css.imageThumb}></div>
+    <li className={css.listItem}>
+      <div className={css.imageThumb}>
+        {url && (
+          <img className={css.photoDemo} src={url} alt="User portrait"></img>
+        )}
+      </div>
 
       <div className={css.dataBox}>
         <p className={css.pName}>{name}</p>
@@ -25,8 +29,9 @@ const ListItem = ({ id, name, number, deleteContact }) => {
 export default ListItem;
 
 ListItem.propTypes = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  number: PropTypes.string,
-  deleteContact: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  url: PropTypes.string,
+  deleteContact: PropTypes.func.isRequired,
 };

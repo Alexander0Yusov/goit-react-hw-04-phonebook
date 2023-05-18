@@ -6,12 +6,13 @@ const Contacts = ({ contactList, deleteContact }) => {
   return (
     <div className={css.container}>
       <ul className={css.contactList}>
-        {contactList.map(({ id, name, number }) => (
+        {contactList.map(({ id, name, number, url }) => (
           <ListItem
             key={id}
             id={id}
             name={name}
             number={number}
+            url={url}
             deleteContact={deleteContact}
           />
         ))}
@@ -28,7 +29,8 @@ Contacts.propTypes = {
       id: PropTypes.string,
       name: PropTypes.string,
       number: PropTypes.string,
+      url: PropTypes.string,
     })
-  ),
-  deleteContact: PropTypes.func,
+  ).isRequired,
+  deleteContact: PropTypes.func.isRequired,
 };
