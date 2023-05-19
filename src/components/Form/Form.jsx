@@ -78,6 +78,7 @@ const Form = ({ addUser, toggleModal }) => {
         <input
           type="file"
           name="image"
+          accept="image/*,.png,.jpg,.gif,.web"
           className={css.imageInput}
           onChange={handlerChangeFile}
         />
